@@ -1,5 +1,3 @@
-import requests
-
 def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
@@ -13,15 +11,11 @@ def get_trending_keywords():
     keywords = []
     for article in articles:
         title = article['title']
-        description = article.get('description', '')
-        keywords.extend(title.split() + description.split())
+        description = article.get('description', '')  # Usa una stringa vuota se 'description' è None
+
+        # Verifica che la description non sia None
+        keywords.extend(title.split() + (description.split() if description else []))
 
     # Prendi solo le prime 30 parole uniche
     unique_keywords = list(set(keywords))[:30]
     return unique_keywords
-
-if __name__ == '__main__':
-    keywords = get_trending_keywords()
-    with open('keywords.txt', 'w') as f:
-        f.write('\n'.join(keywords))
-    print("File 'keywords.txt' aggiornato!")
