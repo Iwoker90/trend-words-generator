@@ -1,36 +1,36 @@
-name: Generate Words and Update File
+name: Update Words File
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Ogni giorno a mezzanotte
-  workflow_dispatch:  # Permette l'esecuzione manuale tramite interfaccia GitHub
-  push:
-    branches:
-      - main  # Si esegue su push al ramo principale
+    - cron: "0 0 * * *"  # Esegue ogni giorno a mezzanotte UTC
+  workflow_dispatch:  # Permette di avviarlo manualmente
 
 jobs:
-  update_words_file:
+  job-name:
+    permissions:
+      contents: write  # Permette il push delle modifiche
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
-      - name: Pull the latest changes from remote
-        run: git pull origin main  # Aggiunto il git pull per risolvere eventuali conflitti
+      - name: Install dependencies
+        run: pip install requests
 
-      - name: Run generate_words.py
+      - name: Run script
         run: python generate_words.py
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git add .
-          git commit -m "Aggiornato words.txt"
-          git push origin main  # Dopo il pull, fai il push delle modifiche
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add words.txt
+          git commit -m "Aggiornato words.txt" || exit 0
+          git push
