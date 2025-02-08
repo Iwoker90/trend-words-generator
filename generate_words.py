@@ -9,11 +9,13 @@ def get_trending_words():
     
     if response.status_code == 200:
         try:
-            data = json.loads(response.text[5:])  # Rimuove caratteri iniziali inutili
-            print("Dati ricevuti dall'API:", json.dumps(data, indent=2))  # Stampa i dati grezzi per il debug
-            
+            # Rimuove caratteri iniziali inutili (se ce ne sono) e stampa la risposta grezza
+            data = json.loads(response.text[5:])  # Tagliamo i primi 5 caratteri per rimuovere il prefisso
+            print("Dati ricevuti dall'API:", json.dumps(data, indent=2))  # Debug: Mostriamo la risposta JSON
+
             trends = data.get("default", {}).get("trendingSearchesDays", [])
-            
+            print("Tendenze trovate:", trends)  # Debug: Verifica se le tendenze sono presenti
+
             words = []
             for day in trends:
                 for trend in day.get("trendingSearches", []):
@@ -44,3 +46,4 @@ def generate_file():
 
 if __name__ == "__main__":
     generate_file()
+
