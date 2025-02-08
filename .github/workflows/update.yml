@@ -6,7 +6,10 @@ on:
   workflow_dispatch:  # Permette di avviarlo manualmente
 
 jobs:
-  update:
+  job-name:
+    permissions:
+      contents: write  # Permette il push delle modifiche
+
     runs-on: ubuntu-latest
 
     steps:
@@ -29,5 +32,4 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add words.txt
-          git commit -m "Aggiornato words.txt" || echo "Nessuna modifica da fare"
-          git push
+          git commit -m "Aggiornato words.tx
