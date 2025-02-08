@@ -21,9 +21,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Pull the latest changes from remote
         run: git pull origin main  # Aggiunto il git pull per risolvere eventuali conflitti
 
