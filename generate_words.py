@@ -4,18 +4,12 @@ def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
         'country': 'us',
-        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',  # Sostituisci con la tua chiave API
+        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',
     }
     response = requests.get(url, params=params)
-    
-    print("Status code:", response.status_code)  # Mostra il codice di stato
-    print("Response JSON:", response.json())  # Mostra la risposta JSON per il debug
-
-    if 'articles' not in response.json():
-        print("Errore: La risposta non contiene 'articles'. Verifica la tua API key o la risposta dell'API.")
-        return []
-
     articles = response.json()['articles']
+
+    # Estrai le parole più ricercate dai titoli e descrizioni
     keywords = []
     for article in articles:
         title = article['title']
@@ -24,13 +18,10 @@ def get_trending_keywords():
 
     # Prendi solo le prime 30 parole uniche
     unique_keywords = list(set(keywords))[:30]
-    
-    # Debug per vedere le parole estratte
-    print("Keywords:", unique_keywords)
-    
-    # Salva nel file
-    with open('words.txt', 'w') as file:
-        file.write('\n'.join(unique_keywords))  # Scrive le parole nel file
     return unique_keywords
 
-get_trending_keywords()
+if __name__ == '__main__':
+    keywords = get_trending_keywords()
+    with open('keywords.txt', 'w') as f:
+        f.write('\n'.join(keywords))
+    print("File 'keywords.txt' aggiornato!")
