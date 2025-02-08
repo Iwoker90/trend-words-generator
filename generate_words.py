@@ -1,4 +1,15 @@
 import requests
+from collections import Counter
+import string
+from nltk import ngrams
+
+# Lista di stopwords italiane (parole comuni da ignorare)
+stopwords = set([
+    "di", "a", "in", "e", "il", "la", "per", "con", "su", "che", "un", "una", 
+    "dei", "della", "alle", "sulle", "dal", "al", "ma", "come", "è", "sono", "quello", 
+    "questo", "si", "non", "perché", "l", "da", "sì", "ha", "questi", "ci", "dopo", 
+    "prima", "come", "bene", "anche", "dovrebbe", "quali", "tra", "questo"
+])
 
 def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
@@ -19,24 +30,33 @@ def get_trending_keywords():
     # Stampa la risposta completa per il debug
     print("Dati ricevuti:", data)
 
-    # Verifica se la chiave 'articles' è presente e se contiene articoli
     if 'articles' not in data or not data['articles']:
         print("Nessun articolo trovato.")
         return []
 
     articles = data['articles']
 
-    # Estrai le parole più ricercate dai titoli e descrizioni
+    # Estrai le parole più significative dai titoli e descrizioni
     keywords = []
     for article in articles:
         title = article['title']
         description = article.get('description', '')  # Usa una stringa vuota se 'description' è None
 
-        # Verifica che la description non sia None
-        keywords.extend(title.split() + (description.split() if description else []))
+        # Filtriamo e puliamo i titoli e le descrizioni dalle stopwords
+        title_words = [word.lower() for word in title.split() if word.lower() not in stopwords and word not in string.punctuation]
+        description_words = [word.lower() for word in description.split() if word.lower() not in stopwords and word not in string.punctuation]
 
-    # Prendi solo le prime 30 parole uniche
-    unique_keywords = list(set(keywords))[:30]
+        # Aggiungiamo le parole significative alla lista
+        keywords.extend(title_words + description_words)
+
+    # Estraiamo i bigrammi (combinazioni di 2 parole)
+    bigrams = ngrams(keywords, 2)
+
+    # Conta la frequenza dei bigrammi
+    bigram_counts = Counter(bigrams)
+
+    # Prendi solo i bigrammi più comuni
+    unique_keywords = [' '.join(bigram) for bigram, _ in bigram_counts.most_common(30)]
     return unique_keywords
 
 if __name__ == '__main__':
