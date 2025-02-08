@@ -2,11 +2,11 @@ name: Update Words File
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Esegue ogni giorno a mezzanotte UTC
+    - cron: "0 0 * * *"  # Esegui ogni giorno a mezzanotte UTC
   workflow_dispatch:  # Permette di avviarlo manualmente
 
 jobs:
-  job-name:
+  update-words:
     permissions:
       contents: write  # Permette il push delle modifiche
 
@@ -26,6 +26,9 @@ jobs:
 
       - name: Run script
         run: python generate_words.py
+
+      - name: Visualizza il contenuto di words.txt
+        run: cat words.txt  # Stampa il contenuto del file words.txt per il debug
 
       - name: Commit and push changes
         run: |
