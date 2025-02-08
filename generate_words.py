@@ -8,17 +8,28 @@ def get_trending_words():
     response = requests.get(url)
     
     if response.status_code == 200:
-        data = json.loads(response.text[5:])  # Rimuove caratteri iniziali inutili
-        trends = data.get("default", {}).get("trendingSearchesDays", [])
-        
-        words = []
-        for day in trends:
-            for trend in day.get("trendingSearches", []):
-                # Aggiungiamo solo il titolo (la stringa della tendenza)
-                words.append(trend.get("query", ""))
-        
-        return words
-    return []
+        try:
+            data = json.loads(response.text[5:])  # Rimuove caratteri iniziali inutili
+            print("Dati ricevuti dall'API:", json.dumps(data, indent=2))  # Stampa i dati grezzi per il debug
+            
+            trends = data.get("default", {}).get("trendingSearchesDays", [])
+            
+            words = []
+            for day in trends:
+                for trend in day.get("trendingSearches", []):
+                    query = trend.get("query", "")
+                    if query:
+                        words.append(query)
+            
+            print("Parole estratte:", words)  # Debug: Vedi le parole estratte
+            
+            return words
+        except Exception as e:
+            print("Errore nel parsing dei dati:", e)
+            return []
+    else:
+        print("Errore nella richiesta API:", response.status_code)
+        return []
 
 def generate_file():
     """Genera un file con 100 parole casuali dalle tendenze."""
@@ -29,7 +40,6 @@ def generate_file():
     selected_words = random.choices(words, k=100)
     
     with open("words.txt", "w") as f:
-        # Scriviamo ogni parola su una nuova riga
         f.write("\n".join(selected_words))  # Parole separati da una nuova riga
 
 if __name__ == "__main__":
