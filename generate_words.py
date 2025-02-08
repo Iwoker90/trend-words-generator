@@ -21,7 +21,7 @@ def get_trending_words():
     return []
 
 def generate_file():
-    """Genera un file con 100 parole casuali dalle tendenze."""
+    """Genera un file con 100 parole casuali dalle tendenze e le salva come lista."""
     words = get_trending_words()
     if not words:
         words = ["nessuna", "tendenza", "disponibile"]
@@ -29,8 +29,7 @@ def generate_file():
     selected_words = random.choices(words, k=min(100, len(words)))  # Evita errori se ci sono meno di 100 parole
     
     with open("words.txt", "w") as f:
-        f.write(" ".join(selected_words))
+        json.dump(selected_words, f, ensure_ascii=False, indent=2)  # Salva in formato lista JSON
 
 if __name__ == "__main__":
     generate_file()
-
