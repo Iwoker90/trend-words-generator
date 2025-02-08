@@ -27,13 +27,14 @@ jobs:
       - name: Run script
         run: python generate_words.py
 
-      - name: Visualizza il contenuto di words.txt
-        run: cat words.txt  # Stampa il contenuto del file words.txt per il debug
+      - name: Visualizza il contenuto di keywords.txt
+        run: cat keywords.txt  # Cambiato 'words.txt' con 'keywords.txt'
 
       - name: Commit and push changes
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          git add words.txt
-          git commit -m "Aggiornato words.txt" || exit 0
+          git add keywords.txt  # Assicurati che sia lo stesso nome
+          git commit -m "Aggiornato keywords.txt" || exit 0
           git push
+
