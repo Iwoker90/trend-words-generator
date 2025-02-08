@@ -2,6 +2,10 @@ import requests
 from collections import Counter
 import string
 from nltk import ngrams
+import nltk
+
+# Scarica risorse necessarie per ngrams
+nltk.download('punkt')
 
 # Lista di stopwords italiane (parole comuni da ignorare)
 stopwords = set([
