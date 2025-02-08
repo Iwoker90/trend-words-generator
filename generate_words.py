@@ -34,7 +34,10 @@ def get_trending_titles():
     titles = []
     for article in articles:
         title = article['title']
-        titles.append(title)
+        
+        # Filtra i titoli che sono solo "Google News" o troppo generici
+        if title and "Google News" not in title and len(title.split()) > 3:
+            titles.append(title)
 
     return titles
 
