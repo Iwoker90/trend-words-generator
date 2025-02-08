@@ -14,9 +14,9 @@ def get_trending_words():
         words = []
         for day in trends:
             for trend in day.get("trendingSearches", []):
-                words.append(trend.get("title", ""))  # Prende solo il titolo della tendenza
+                words.append(trend.get("query", ""))  # Prende solo il titolo della tendenza
         
-        return [word for word in words if word]  # Assicura che siano solo stringhe
+        return [word for word in words if word]  # Rimuove eventuali stringhe vuote
     
     return []
 
@@ -26,8 +26,8 @@ def generate_file():
     if not words:
         words = ["nessuna", "tendenza", "disponibile"]
     
-    selected_words = random.choices(words, k=min(100, len(words)))  # Evita errori se ci sono meno di 100 parole
-
+    selected_words = random.sample(words, min(100, len(words)))  # Evita duplicati
+    
     with open("words.txt", "w") as f:
         json.dump(selected_words, f, ensure_ascii=False, indent=2)  # Salva in formato lista JSON
 
