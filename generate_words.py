@@ -3,17 +3,21 @@ import requests
 def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
-        'country': 'it',  # Italia
-        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',
+        'sources': 'google-news-it',  # Filtro per le notizie italiane di Google News
+        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',  # La tua chiave API
     }
     response = requests.get(url, params=params)
 
     # Verifica della risposta dell'API
+    print(f"Status Code: {response.status_code}")
     if response.status_code != 200:
         print(f"Errore nella richiesta: {response.status_code}")
         return []
 
     data = response.json()
+
+    # Stampa la risposta completa per il debug
+    print("Dati ricevuti:", data)
 
     # Verifica se la chiave 'articles' è presente e se contiene articoli
     if 'articles' not in data or not data['articles']:
