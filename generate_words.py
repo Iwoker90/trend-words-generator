@@ -9,26 +9,30 @@ def get_trending_words():
     print("STATUS CODE:", response.status_code)  # Debug
 
     if response.status_code == 200:
-        print("RAW RESPONSE:", response.text[:500])  # Debug: Mostra i primi 500 caratteri della risposta
-        
         try:
-            data = json.loads(response.text[5:])  # Rimuove caratteri iniziali inutili
+            # Proviamo a rimuovere i caratteri iniziali che non sono parte del JSON
+            raw_data = response.text[5:]  # Rimuove ')]}' per ottenere il JSON corretto
+            
+            print("RAW DATA:", raw_data[:500])  # Stampa i primi 500 caratteri della risposta
+
+            data = json.loads(raw_data)
             trends = data.get("default", {}).get("trendingSearchesDays", [])
             
             words = []
             for day in trends:
                 for trend in day.get("trendingSearches", []):
-                    words.append(trend.get("query", ""))  # Prende solo il titolo della tendenza
+                    query = trend.get("query", "")
+                    if query:
+                        words.append(query)
             
             print("PAROLE TROVATE:", words)  # Debug
-            return [word for word in words if word]  # Rimuove eventuali stringhe vuote
+            return words if words else ["Nessuna tendenza disponibile"]
         
         except Exception as e:
-            print("ERRORE JSON:", str(e))
-            return []
-
-    return []
+            print("ERRORE NEL PARSING JSON:", str(e))
+            return ["Errore nel parsing dei dati"]
+    
+    return ["Errore nella richiesta API"]
 
 if __name__ == "__main__":
     get_trending_words()
-
