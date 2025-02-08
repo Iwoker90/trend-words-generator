@@ -1,1 +1,22 @@
-{'query': 'Alaska', 'exploreLink': '/trends/explore?q=Alaska&date=now+7-d&geo=US'} {'query': 'Kennedy Center', 'exploreLink': '/trends/explore?q=Kennedy+Center&date=now+7-d&geo=US'} {'query': 'Super Bowl Time', 'exploreLink': '/trends/explore?q=Super+Bowl+Time&date=now+7-d&geo=US'} {'query': 'AC Milan', 'exploreLink': '/trends/explore?q=AC+Milan&date=now+7-d&geo=US'} {'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'} {'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'} {'query': 'Dick Jauron', 'exploreLink': '/trends/explore?q=Dick+Jauron&date=now+7-d&geo=US'} {'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'} {'query': 'Mavs', 'exploreLink': '/trends/explore?q=Mavs&date=now+7-d&geo=US'} {'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'} {'query': 'Real Madrid  atlético Madrid', 'exploreLink': '/trends/explore?q=Real+Madrid++atl%C3%A9tico+Madrid&date=now+7-d&geo=US'} {'query': 'UConn basketball', 'exploreLink': '/trends/explore?q=UConn+basketball&date=now+7-d&geo=US'} {'query': 'Donuts recalled', 'exploreLink': '/trends/explore?q=Donuts+recalled&date=now+7-d&geo=US'} {'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'} {'query': 'Buffalo Chicken Dip', 'exploreLink': '/trends/explore?q=Buffalo+Chicken+Dip&date=now+7-d&geo=US'} {'query': 'Alaska', 'exploreLink': '/trends/explore?q=Alaska&date=now+7-d&geo=US'} {'query': 'Dick Jauron', 'exploreLink': '/trends/explore?q=Dick+Jauron&date=now+7-d&geo=US'} {'query': 'AC Milan', 'exploreLink': '/trends/explore?q=AC+Milan&date=now+7-d&geo=US'} {'query': 'FA Cup', 'exploreLink': '/trends/explore?q=FA+Cup&date=now+7-d&geo=US'} {'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'}
+[
+  "{'query': 'Rick Pitino', 'exploreLink': '/trends/explore?q=Rick+Pitino&date=now+7-d&geo=US'}",
+  "{'query': 'AC Milan', 'exploreLink': '/trends/explore?q=AC+Milan&date=now+7-d&geo=US'}",
+  "{'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'}",
+  "{'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'}",
+  "{'query': 'Rick Pitino', 'exploreLink': '/trends/explore?q=Rick+Pitino&date=now+7-d&geo=US'}",
+  "{'query': 'Michigan State basketball', 'exploreLink': '/trends/explore?q=Michigan+State+basketball&date=now+7-d&geo=US'}",
+  "{'query': 'Saquon Barkley', 'exploreLink': '/trends/explore?q=Saquon+Barkley&date=now+7-d&geo=US'}",
+  "{'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'}",
+  "{'query': 'Dick Jauron', 'exploreLink': '/trends/explore?q=Dick+Jauron&date=now+7-d&geo=US'}",
+  "{'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'}",
+  "{'query': 'AC Milan', 'exploreLink': '/trends/explore?q=AC+Milan&date=now+7-d&geo=US'}",
+  "{'query': 'Rick Pitino', 'exploreLink': '/trends/explore?q=Rick+Pitino&date=now+7-d&geo=US'}",
+  "{'query': 'Critics Choice Awards 2025', 'exploreLink': '/trends/explore?q=Critics+Choice+Awards+2025&date=now+7-d&geo=US'}",
+  "{'query': 'Super Bowl Time', 'exploreLink': '/trends/explore?q=Super+Bowl+Time&date=now+7-d&geo=US'}",
+  "{'query': 'FA Cup', 'exploreLink': '/trends/explore?q=FA+Cup&date=now+7-d&geo=US'}",
+  "{'query': 'Dick Jauron', 'exploreLink': '/trends/explore?q=Dick+Jauron&date=now+7-d&geo=US'}",
+  "{'query': 'PlayStation Network status', 'exploreLink': '/trends/explore?q=PlayStation+Network+status&date=now+7-d&geo=US'}",
+  "{'query': 'Kennedy Center', 'exploreLink': '/trends/explore?q=Kennedy+Center&date=now+7-d&geo=US'}",
+  "{'query': 'Donuts recalled', 'exploreLink': '/trends/explore?q=Donuts+recalled&date=now+7-d&geo=US'}",
+  "{'query': 'Mavs', 'exploreLink': '/trends/explore?q=Mavs&date=now+7-d&geo=US'}"
+]
