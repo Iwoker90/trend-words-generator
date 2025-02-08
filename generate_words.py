@@ -1,17 +1,3 @@
-import subprocess
-import sys
-
-# Funzione per installare pytrends se non è già installato
-def install_pytrends():
-    try:
-        import pytrends
-    except ImportError:
-        print("pytrends non trovato, installazione in corso...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "pytrends"])
-
-# Installiamo pytrends se necessario
-install_pytrends()
-
 from pytrends.request import TrendReq
 
 # Inizializza pytrends
@@ -19,8 +5,7 @@ pytrends = TrendReq(hl='it', tz=360)
 
 # Funzione per ottenere le tendenze di ricerca in Italia
 def get_trending_searches():
-    pytrends.build_payload(kw_list=[], geo='IT', timeframe='now 1-d')
-    trending_searches = pytrends.trending_searches(pn='italy')  # Prendi le tendenze di ricerca in Italia
+    trending_searches = pytrends.trending_searches(pn='italy')  # Ottieni direttamente le tendenze in Italia senza build_payload
     return trending_searches
 
 if __name__ == '__main__':
