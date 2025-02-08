@@ -3,11 +3,24 @@ import requests
 def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
-        'country': 'it',  # Cambiato da 'us' a 'it' per le notizie italiane
+        'country': 'it',  # Italia
         'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',
     }
     response = requests.get(url, params=params)
-    articles = response.json()['articles']
+
+    # Verifica della risposta dell'API
+    if response.status_code != 200:
+        print(f"Errore nella richiesta: {response.status_code}")
+        return []
+
+    data = response.json()
+
+    # Verifica se la chiave 'articles' è presente e se contiene articoli
+    if 'articles' not in data or not data['articles']:
+        print("Nessun articolo trovato.")
+        return []
+
+    articles = data['articles']
 
     # Estrai le parole più ricercate dai titoli e descrizioni
     keywords = []
@@ -24,6 +37,11 @@ def get_trending_keywords():
 
 if __name__ == '__main__':
     keywords = get_trending_keywords()
-    with open('keywords.txt', 'w') as f:  # Manteniamo il nome 'keywords.txt'
-        f.write('\n'.join(keywords))
-    print("File 'keywords.txt' aggiornato!")
+
+    # Se non sono state trovate parole, stampa un messaggio
+    if not keywords:
+        print("Nessuna parola trovata.")
+    else:
+        with open('keywords.txt', 'w') as f:
+            f.write('\n'.join(keywords))
+        print("File 'keywords.txt' aggiornato!")
