@@ -4,7 +4,7 @@ def get_trending_keywords():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
         'country': 'us',
-        'apiKey': 'YOUR_NEWSAPI_KEY',  # Sostituisci con la tua chiave API
+        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',  # Sostituisci con la tua chiave API
     }
     response = requests.get(url, params=params)
     
