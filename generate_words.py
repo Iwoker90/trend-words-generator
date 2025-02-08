@@ -5,10 +5,10 @@ pytrends = TrendReq(hl='it', tz=360)
 
 # Funzione per ottenere le ricerche di tendenza in Italia
 def get_trending_searches():
-    pytrends.build_payload(kw_list=[], geo='IT', timeframe='now 1-d')
-    trending_searches = pytrends.trending_searches()
+    # Ottieni le tendenze generali senza parametri specifici
+    trending_searches = pytrends.trending_searches(pn='italy')
     
-    # Prendi i primi 100 trend
+    # Prendi i primi 100 trend (se disponibili)
     return trending_searches.head(100).values.flatten()
 
 # Funzione principale
