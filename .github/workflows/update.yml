@@ -1,0 +1,33 @@
+name: Update Words File
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Esegue ogni giorno a mezzanotte UTC
+  workflow_dispatch:  # Permette di avviarlo manualmente
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        run: python generate_words.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add words.txt
+          git commit -m "Aggiornato words.txt" || echo "Nessuna modifica da fare"
+          git push
