@@ -14,7 +14,8 @@ def get_trending_words():
         words = []
         for day in trends:
             for trend in day.get("trendingSearches", []):
-                words.append(trend.get("title", ""))
+                # Aggiungiamo solo il titolo (la stringa della tendenza)
+                words.append(trend.get("query", ""))
         
         return words
     return []
