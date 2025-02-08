@@ -23,8 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests
-          pip install nltk  # Aggiungi questo comando per installare nltk
+          pip install --upgrade pip
+          pip install pytrends  # Forza l'installazione di pytrends
 
       - name: Run script
         run: python generate_words.py
