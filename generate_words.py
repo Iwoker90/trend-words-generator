@@ -23,20 +23,21 @@ def get_trending_keywords_from_news():
     params = {
         'lang': 'it',  # Imposta la lingua su Italiano
         'token': '8abd8f5888fdd061cb42defea779507d',  # La tua chiave API di GNews
+        'max': 100,  # Impostiamo un limite di articoli per ottenere abbastanza parole chiave
     }
 
     # Fai la richiesta all'API
     response = requests.get(url, params=params)
     articles = response.json().get('articles', [])
 
-    # Estrai parole chiave aggiuntive, come categorie e descrizioni più generali
+    # Estrai parole chiave da titoli e descrizioni, includendo solo parole di interesse
     keywords = []
     for article in articles:
         title = article.get('title', '')
         description = article.get('description', '')
         content = article.get('content', '')
 
-        # Estrai parole chiave dalla combinazione di titolo, descrizione e contenuto
+        # Aggiungiamo i titoli e le descrizioni all'elenco delle parole chiave
         text = title + ' ' + description + ' ' + content
         keywords.extend(text.split())
 
@@ -44,8 +45,12 @@ def get_trending_keywords_from_news():
         if 'category' in article:
             keywords.extend(article['category'].split())
 
+    # Rimuoviamo le parole troppo comuni (stopwords) e limitiamo a 80 parole uniche
+    stopwords = set(['il', 'la', 'che', 'di', 'e', 'per', 'in', 'a', 'da', 'con', 'su', 'una', 'un', 'del', 'questa', 'questo'])
+    filtered_keywords = [word for word in keywords if word.lower() not in stopwords]
+
     # Prendi solo le parole uniche e limitale a 80
-    unique_keywords = list(set(keywords))[:80]
+    unique_keywords = list(set(filtered_keywords))[:80]
     print(f"GNews ha restituito {len(unique_keywords)} parole chiave.")  # Log per debugging
     return unique_keywords
 
@@ -63,13 +68,4 @@ if __name__ == '__main__':
     # Se ci sono meno di 100 risultati, aggiungi elementi da GNews fino a raggiungere 100
     if len(all_searches) < 100:
         remaining = 100 - len(all_searches)
-        all_searches.extend(searches_from_news[:remaining])
-
-    # Limita a 100 i risultati finali
-    all_searches = all_searches[:100]
-    
-    # Scrivi i risultati nel file
-    with open('keywords.txt', 'w') as f:
-        f.write('\n'.join(all_searches))
-    
-    print(f"File 'keywords.txt' aggiornato con {len(all_searches)} ricerche!")
+        all_searches.extend(searches_f
