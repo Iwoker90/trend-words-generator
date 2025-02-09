@@ -55,4 +55,4 @@ if __name__ == '__main__':
     all_searches = searches_from_pytrends + searches_from_news
     
     # Limita a 100 i risultati finali
-    all_searches = al
+    all_searches = all
