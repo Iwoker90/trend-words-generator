@@ -14,6 +14,7 @@ def get_trending_searches():
     # Aggiungi i primi 100 risultati (prende tutti i dati disponibili)
     all_trends.extend(trending_searches.head(100).values.flatten())
     
+    print(f"PyTrends ha restituito {len(all_trends)} tendenze.")  # Log per debugging
     return all_trends[:100]  # Prendi solo i primi 100 trend
 
 # Funzione per ottenere le parole chiave dalle notizie tramite News API
@@ -37,6 +38,7 @@ def get_trending_keywords_from_news():
 
     # Prendi solo le parole uniche e limitale a 80
     unique_keywords = list(set(keywords))[:80]
+    print(f"NewsAPI ha restituito {len(unique_keywords)} parole chiave.")  # Log per debugging
     return unique_keywords
 
 # Funzione principale
@@ -57,4 +59,4 @@ if __name__ == '__main__':
     with open('keywords.txt', 'w') as f:
         f.write('\n'.join(all_searches))
     
-    print("File 'keywords.txt' aggiornato con 100 ricerche!")
+    print(f"File 'keywords.txt' aggiornato con {len(all_searches)} ricerche!")
