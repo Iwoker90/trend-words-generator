@@ -22,7 +22,7 @@ def get_trending_keywords_from_news():
     url = 'https://gnews.io/api/v4/search'
     params = {
         'q': 'italia',  # Query di ricerca
-        'token': '8abd8f5888fdd061cb42defea779507d',  # Sostituisci con la tua chiave API di GNews
+        'token': 'YOUR_API_KEY',  # Sostituisci con la tua chiave API di GNews
         'lang': 'it',  # Imposta la lingua su italiano
         'country': 'it'  # Imposta il paese su Italia
     }
@@ -55,4 +55,10 @@ if __name__ == '__main__':
     all_searches = searches_from_pytrends + searches_from_news
     
     # Limita a 100 i risultati finali
-    all_searches = all
+    all_searches = all_searches[:100]
+    
+    # Scrivi i risultati nel file
+    with open('keywords.txt', 'w') as f:
+        f.write('\n'.join(all_searches))
+    
+    print(f"File 'keywords.txt' aggiornato con {len(all_searches)} ricerche!")
