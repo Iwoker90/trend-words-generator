@@ -29,12 +29,20 @@ def get_trending_keywords_from_news():
     response = requests.get(url, params=params)
     articles = response.json().get('articles', [])
 
-    # Estrai le parole chiave dai titoli delle notizie
+    # Estrai parole chiave aggiuntive, come categorie e descrizioni più generali
     keywords = []
     for article in articles:
         title = article.get('title', '')
         description = article.get('description', '')
-        keywords.extend(title.split() + description.split())
+        content = article.get('content', '')
+
+        # Estrai parole chiave dalla combinazione di titolo, descrizione e contenuto
+        text = title + ' ' + description + ' ' + content
+        keywords.extend(text.split())
+
+        # Proviamo anche a estrarre categorie, se disponibili
+        if 'category' in article:
+            keywords.extend(article['category'].split())
 
     # Prendi solo le parole uniche e limitale a 80
     unique_keywords = list(set(keywords))[:80]
