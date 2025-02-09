@@ -68,4 +68,13 @@ if __name__ == '__main__':
     # Se ci sono meno di 100 risultati, aggiungi elementi da GNews fino a raggiungere 100
     if len(all_searches) < 100:
         remaining = 100 - len(all_searches)
-        all_searches.extend(searches_f
+        all_searches.extend(searches_from_news[:remaining])
+
+    # Limita a 100 i risultati finali
+    all_searches = all_searches[:100]
+    
+    # Scrivi i risultati nel file
+    with open('keywords.txt', 'w') as f:
+        f.write('\n'.join(all_searches))
+    
+    print(f"File 'keywords.txt' aggiornato con {len(all_searches)} ricerche!")
