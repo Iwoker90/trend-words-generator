@@ -17,12 +17,14 @@ def get_trending_searches():
     print(f"PyTrends ha restituito {len(all_trends)} tendenze.")  # Log per debugging
     return all_trends[:100]  # Prendi solo i primi 100 trend
 
-# Funzione per ottenere le parole chiave dalle notizie tramite News API
+# Funzione per ottenere le parole chiave dalle notizie tramite GNews API
 def get_trending_keywords_from_news():
-    url = 'https://newsapi.org/v2/top-headlines'
+    url = 'https://gnews.io/api/v4/search'
     params = {
-        'country': 'it',  # Imposta il paese su Italia
-        'apiKey': '1eaa205d4f1547d4b79dd2e230640f9c',  # Sostituisci con la tua chiave API
+        'q': 'italia',  # Query di ricerca
+        'token': '8abd8f5888fdd061cb42defea779507d',  # Sostituisci con la tua chiave API di GNews
+        'lang': 'it',  # Imposta la lingua su italiano
+        'country': 'it'  # Imposta il paese su Italia
     }
 
     # Fai la richiesta all'API
@@ -38,7 +40,7 @@ def get_trending_keywords_from_news():
 
     # Prendi solo le parole uniche e limitale a 80
     unique_keywords = list(set(keywords))[:80]
-    print(f"NewsAPI ha restituito {len(unique_keywords)} parole chiave.")  # Log per debugging
+    print(f"GNews ha restituito {len(unique_keywords)} parole chiave.")  # Log per debugging
     return unique_keywords
 
 # Funzione principale
@@ -53,10 +55,4 @@ if __name__ == '__main__':
     all_searches = searches_from_pytrends + searches_from_news
     
     # Limita a 100 i risultati finali
-    all_searches = all_searches[:100]
-    
-    # Scrivi i risultati nel file
-    with open('keywords.txt', 'w') as f:
-        f.write('\n'.join(all_searches))
-    
-    print(f"File 'keywords.txt' aggiornato con {len(all_searches)} ricerche!")
+    all_searches = al
