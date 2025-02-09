@@ -11,13 +11,8 @@ def get_trending_searches():
     # Inizializziamo una lista vuota per raccogliere tutte le tendenze
     all_trends = []
     
-    # Aggiungi i primi 20 risultati
-    all_trends.extend(trending_searches.head(20).values.flatten())
-    
-    # Proviamo a ottenere altri 80 (in gruppi da 20)
-    for i in range(1, 5):  # Aggiungi 4 richieste per ottenere altre 80 tendenze
-        start = i * 20
-        all_trends.extend(trending_searches.iloc[start:start+20].values.flatten())
+    # Aggiungi i primi 100 risultati (prende tutti i dati disponibili)
+    all_trends.extend(trending_searches.head(100).values.flatten())
     
     return all_trends[:100]  # Prendi solo i primi 100 trend
 
